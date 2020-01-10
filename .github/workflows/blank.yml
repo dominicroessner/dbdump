@@ -1,0 +1,35 @@
+name: CI
+
+on: [push]
+
+jobs:
+  # https://github.com/actions/example-services/blob/master/.github/workflows/postgres-service.yml
+  build:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:11.5
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: postgres
+        ports:
+          - 5432:5432
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+        
+    steps:
+    - uses: actions/checkout@v1
+    - name: Setup database template
+      run: |
+        sudo apt-get install postgresql-client
+        psql -l # TODO: remove this, just a test to see if we connect to the db
+        # TODO: run migrations and fixtures here
+        pg_dump postgres > templatedb_dump.sql
+      env:
+        PG_HOST: localhost
+        PG_USER: postgres
+        PG_PASSWORD: postgres
+    - name: Upload template to S3
+      run: |
+        # TODO: set credentials to be able to upload to S3
+        aws s3api put-object --bucket template_bucket --key templatedb_dump.sql --body ./templatedb_dump.sql
