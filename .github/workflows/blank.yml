@@ -27,6 +27,9 @@ jobs:
         psql -c "CREATE DATABASE templatedb;"
         # TODO: run migrations and fixtures here
         pg_dump templatedb > templatedb_dump.sql
+      env:
+        POSTGRES_HOST: postgres
+        POSTGRES_PORT: ${{ job.services.postgres.ports[5432] }}
     - name: Upload template to S3
       run: |
         # TODO: set credentials to be able to upload to S3
