@@ -29,8 +29,8 @@ jobs:
       env:
         # use localhost for the host here because we are running the job on the VM.
         # If we were running the job on in a container this would be postgres
-        PG_HOST: postgres
         PG_USER: postgres
+        PG_HOST: localhost
         PG_DATABASE: postgres
         PG_PASSWORD: postgres
         PG_PORT: ${{ job.services.postgres.ports['5432'] }}
