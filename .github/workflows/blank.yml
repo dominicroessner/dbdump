@@ -20,7 +20,7 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: Run migrations and fixtures
-      run: /usr/local/bin/pg_dump templatedb > templatedb_dump.sql
+      run: /usr/lib/postgresql/10.5/bin/pg_dump templatedb > templatedb_dump.sql
     - name: Upload template to S3
       run: |
         ls -l
