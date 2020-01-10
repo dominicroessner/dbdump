@@ -10,7 +10,7 @@ jobs:
       postgres:
         image: postgres:11.5
         env:
-          POSTGRES_USER: postgres
+          POSTGRES_USER: runner
           POSTGRES_PASSWORD: postgres
           POSTGRES_DB: postgres
         ports:
@@ -30,7 +30,7 @@ jobs:
       env:
         # use localhost for the host here because we are running the job on the VM.
         # If we were running the job on in a container this would be postgres
-        PG_USER: postgres
+        PG_USER: runner
         PG_HOST: localhost
         PG_DATABASE: postgres
         PG_PASSWORD: postgres
