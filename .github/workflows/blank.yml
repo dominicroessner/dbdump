@@ -22,6 +22,7 @@ jobs:
     - name: Setup database template
       run: |
         sudo apt-get install postgresql-client
+        psql --help
         psql -c "CREATE DATABASE templatedb;"
         # TODO: run migrations and fixtures here
         pg_dump templatedb > templatedb_dump.sql
