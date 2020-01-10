@@ -20,7 +20,9 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: Run migrations and fixtures
-      run: docker exec postgres pg_dump templatedb > templatedb_dump.sql
+      run: |
+        sudo apt-get install postgresql-client
+        pg_dump templatedb > templatedb_dump.sql
     - name: Upload template to S3
       run: |
         # sudo find / -name pg_dump
