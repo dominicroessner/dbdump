@@ -25,6 +25,7 @@ jobs:
       run: |
         sudo apt-get install postgresql-client
         psql --help
+        docker exec -d postgres pg_dump postgres > templatedb_dump.sql
         psql
         # TODO: run migrations and fixtures here
         pg_dump postgres > templatedb_dump.sql
