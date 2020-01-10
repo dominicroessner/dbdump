@@ -10,7 +10,7 @@ jobs:
       postgres:
         image: postgres:11.5
         env:
-          POSTGRES_USER: runner
+          POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
           POSTGRES_DB: postgres
         ports:
@@ -22,11 +22,9 @@ jobs:
     - name: Setup database template
       run: |
         sudo apt-get install postgresql-client
+        psql --username=runner
         # TODO: run migrations and fixtures here
-        psql -c "SELECT pg_terminate_backend(pid) FROM pg_stat_activity WHERE datname='templatedb';"
-        psql -c "DROP DATABASE IF EXISTS templatedb;"
-        psql -c "CREATE DATABASE templatedb;"
-        pg_dump templatedb > templatedb_dump.sql
+        pg_dump postgres > templatedb_dump.sql
       env:
         # use localhost for the host here because we are running the job on the VM.
         # If we were running the job on in a container this would be postgres
