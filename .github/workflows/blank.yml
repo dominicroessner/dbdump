@@ -22,6 +22,7 @@ jobs:
     - name: Setup database template
       run: |
         sudo apt-get install postgresql-client
+        wait-on tcp:5432
         psql -l
         # TODO: run migrations and fixtures here
         pg_dump postgres > templatedb_dump.sql
