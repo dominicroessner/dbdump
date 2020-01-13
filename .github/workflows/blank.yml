@@ -28,4 +28,4 @@ jobs:
     - name: Upload dump to S3
       run: |
         # TODO: set credentials to be able to upload to S3
-        aws s3api put-object --bucket dump_bucket --key testdb_dump.sql --body ./testdb.dump
+        aws s3api put-object --bucket test-database-duplicates --key testdb.dump --body ./testdb.dump
