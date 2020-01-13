@@ -25,7 +25,8 @@ jobs:
         # psql -l # TODO: remove this, just a test to see if we connect to the db
         # TODO: run migrations and fixtures here
         # pg_dump postgres > testdb_dump.sql
-        pg_dump postgres --host=localhost --dbname=postgres://postgres:postgres@localhost:${{ job.services.postgres.ports[5432] }}/backend > testdb_dump.sql
+        # pg_dump postgres --host=localhost --dbname=postgres://postgres:postgres@localhost:${{ job.services.postgres.ports[5432] }}/backend > testdb_dump.sql
+        pg_dump -Fc backend > testdb_dump.dump
       env:
         PG_HOST: localhost
         PG_USER: postgres
