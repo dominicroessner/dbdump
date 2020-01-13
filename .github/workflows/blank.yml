@@ -18,6 +18,7 @@ jobs:
       run: |
         sudo apt-get install postgresql-client
         # TODO: run migrations and fixtures here
+        psql -l
         pg_dump -Fc -v -f testdb.dump
       env:
         PGHOST: localhost
