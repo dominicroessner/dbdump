@@ -9,10 +9,6 @@ jobs:
     services:
       postgres:
         image: postgres:11.5
-        env:
-          POSTGRES_USER: postgres
-          # POSTGRES_PASSWORD: postgres
-          POSTGRES_DB: backend
         ports:
           - 5432:5432
         options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
@@ -28,7 +24,7 @@ jobs:
         # pg_dump postgres --host=localhost --dbname=postgres://postgres:postgres@localhost:${{ job.services.postgres.ports[5432] }}/backend > testdb_dump.sql
         # pg_dump -Fc backend > testdb.dump
         # pg_dump -Fc -v --host=localhost --username=postgres --dbname=backend -f testdb.dump
-        pg_dump -Fc -v --host=localhost --username=postgres --dbname=backend -f testdb.dump
+        pg_dump -Fc -v --host=localhost -f testdb.dump
       env:
         PG_HOST: localhost
         PG_USER: postgres
