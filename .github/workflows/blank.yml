@@ -27,7 +27,7 @@ jobs:
         # pg_dump postgres > testdb_dump.sql
         # pg_dump postgres --host=localhost --dbname=postgres://postgres:postgres@localhost:${{ job.services.postgres.ports[5432] }}/backend > testdb_dump.sql
         # pg_dump -Fc backend > testdb.dump
-        pg_dump -Fc -v --host=localhost --username=postgres --dbname=backend -f testdb.dump
+        pg_dump -Fc -v --host=localhost --username=postgres --no-password --dbname=backend -f testdb.dump
 
       env:
         PG_HOST: localhost
